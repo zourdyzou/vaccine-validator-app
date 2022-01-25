@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js';
-import AdminSchema from '@models/AdminSchema';
+import AdminSchema from '@/models/admin.schema';
 
 export const createAdmin = async (): Promise<any> => {
   const username = process.env.DEFAULT_ADMIN_USERNAME!;
