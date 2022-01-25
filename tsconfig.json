@@ -25,10 +25,11 @@
     "paths": {
       "@": ["./src", "./public"],
       "@/*": ["./src/*", "./src/models/*", "./src/routes/*"],
-      "@interfaces": ["./src/interfaces"],
-      "@models": ["./src/models"],
-      "@routes": ["./src/routes"],
-      "@controllers": ["./src/controllers"]
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@models/*": ["./src/models/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "exclude": ["node_modules"],

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { Payload } from '../controllers/UserControllers';
+import { Payload } from '@interfaces/user.interface';
 
 interface TypedRequest extends Request {
   user: Payload;

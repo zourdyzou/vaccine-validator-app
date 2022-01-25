@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { removeTemp } from '../utils/removeTemp';
+import { removeTemp } from '@utils/removeTemp';
 import fileUpload from 'express-fileupload';
 
 export const uploadImageMiddleware = async (

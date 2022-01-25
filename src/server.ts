@@ -5,8 +5,6 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 
-import userRouter from './routes/user';
-
 // import path from 'path';
 // import fileUpload from 'express-fileupload';
 
@@ -20,7 +18,6 @@ import userRouter from './routes/user';
   app.use(helmet());
 
   // routes
-  app.use('/user', userRouter);
   app.get('/', (_req: Request, res: Response) => {
     res.send(' <div><h1>God bless humanity!</h1></div>  ');
   });
