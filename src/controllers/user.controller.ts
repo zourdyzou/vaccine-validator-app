@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User } from '@/models/schemas';
+import { User, UserVaccine } from '@/models/schemas';
 import {
   TypedRequest,
   UserController as UserInterface,
@@ -7,7 +7,7 @@ import {
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
-import { UserDocument } from '@/interfaces/root';
+import { UserDocument, UserVaccineDocument } from '@/interfaces/root';
 
 class UserController extends UserInterface {
   public async create(
@@ -65,57 +65,76 @@ class UserController extends UserInterface {
     }
   }
 
-  public update(req: Request, res: Response): void {
+  public update(req: Request, res: Response): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  public delete(req: Request, res: Response): void {
+  public delete(req: Request, res: Response): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
   public getSingleUser(
     req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
     res: Response<any, Record<string, any>>
-  ): void {
+  ): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  public getAllUser(
-    req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
+  public async getAllUser(
+    _req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
     res: Response<any, Record<string, any>>
-  ): void {
-    throw new Error('Method not implemented.');
+  ): Promise<void> {
+    try {
+      const list = await User.find({}).sort('-createdAt');
+
+      for (const user of list) {
+        const vaccine = await UserVaccine.find({
+          user: user._id,
+        }).sort('-createdAt');
+
+        user._doc.vaccine = vaccine;
+      }
+
+      res
+        .status(200)
+        .json({ message: 'success getting all user', lists: list });
+      return;
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+      });
+    }
   }
 
-  public vaccinated(
+  public async vaccinated(
     req: TypedRequest<{
       userId: string;
       vaccineId: string;
       vaccineLotId: string;
     }>,
     res: Response<any, Record<string, any>>
-  ): void {
+  ): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  public getAllPlace(
+  public async getAllPlace(
     req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
     res: Response<any, Record<string, any>>
-  ): void {
+  ): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  public checkinPlace(
+  public async checkinPlace(
     req: TypedRequest<{ placeId: string }>,
     res: Response<any, Record<string, any>>
-  ): void {
+  ): Promise<void> {
     throw new Error('Method not implemented.');
   }
 
-  public placeVisited(
+  public async placeVisited(
     req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
     res: Response<any, Record<string, any>>
-  ): void {
+  ): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }

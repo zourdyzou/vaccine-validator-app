@@ -6,6 +6,9 @@ export interface Controllers {
   delete(req: express.Request, res: express.Response): void;
 }
 
+interface DocumentResult<A> extends mongoose.Document {
+  _doc: A;
+}
 export interface AdminController {
   summary(): void;
   login(): void;
@@ -22,13 +25,14 @@ export interface AdminDocument extends mongoose.Document {
   password: string;
 }
 
-export interface UserDocument extends mongoose.Document {
+export interface UserDocument extends DocumentResult<UserDocument> {
   idNumber: string;
   phoneNumber: string;
   fullName: string;
   address: string;
   createdAt: Date;
   updatedAt: Date;
+  vaccine?: UserVaccineDocument | any;
 }
 
 export interface PlaceDocument extends mongoose.Document {
