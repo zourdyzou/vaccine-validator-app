@@ -33,6 +33,8 @@ export interface UserDocument extends DocumentResult<UserDocument> {
   createdAt: Date;
   updatedAt: Date;
   vaccine?: UserVaccineDocument | any;
+  vaccinated?: UserVaccineDocument | any;
+  placeVisited?: UserPlaceDocument | any;
 }
 
 export interface PlaceDocument extends mongoose.Document {

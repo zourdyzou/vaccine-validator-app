@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { User, UserVaccine } from '@/models/schemas';
+import { User, UserVaccine, UserPlace } from '@/models/schemas';
 import {
   TypedRequest,
   UserController as UserInterface,
@@ -7,7 +7,7 @@ import {
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
-import { UserDocument, UserVaccineDocument } from '@/interfaces/root';
+import { UserDocument } from '@/interfaces/root';
 
 class UserController extends UserInterface {
   public async create(
@@ -73,11 +73,31 @@ class UserController extends UserInterface {
     throw new Error('Method not implemented.');
   }
 
-  public getSingleUser(
+  public async getSingleUser(
     req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
     res: Response<any, Record<string, any>>
   ): Promise<void> {
-    throw new Error('Method not implemented.');
+    try {
+      const user = (await User.findById(req.params.id)) as UserDocument;
+      const userVaccine = await UserVaccine.find({
+        user: req.params.id,
+      })
+        .populate('vaccine')
+        .populate('vaccineLot')
+        .sort('-createdAt');
+      const userPlaceVisit = await UserPlace.find({
+        user: req.params.id,
+      })
+        .populate('place')
+        .sort('-createdAt');
+
+      user._doc.vaccinated = userVaccine;
+      user._doc.placeVisited = userPlaceVisit;
+
+      res.status(201).json({ message: 'send user data successful', user });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 
   public async getAllUser(
