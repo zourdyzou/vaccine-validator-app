@@ -7,10 +7,62 @@ import {
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
+import { UserDocument } from '@/interfaces/root';
 
 class UserController extends UserInterface {
-  public create(req: Request, res: Response): void {
-    throw new Error('Method not implemented.');
+  public async create(
+    req: TypedRequest<
+      {
+        phoneNumber: string;
+        idNumber: string;
+      } & UserDocument
+    >,
+    res: Response
+  ): Promise<void> {
+    const { phoneNumber, idNumber } = req.body;
+
+    try {
+      let user = await User.findOne({
+        phoneNumber,
+      });
+
+      if (user) {
+        res.status(403).json({
+          message: 'phone number already registered for another account',
+        });
+
+        return;
+      }
+
+      user = await User.findOne({
+        idNumber,
+      });
+
+      if (user) {
+        res.status(403).json({
+          message: 'ID number already registered for another account',
+        });
+        return;
+      }
+
+      const newUser = new User(req.body);
+      const savedUser = await newUser.save();
+      const token = jwt.sign(
+        {
+          id: savedUser._id,
+        },
+        process.env.TOKEN_SECRET_KEY!
+      );
+
+      res.status(201).json({
+        user: savedUser,
+        token,
+      });
+
+      return;
+    } catch (error) {
+      res.status(500).json({ message: error });
+    }
   }
 
   public update(req: Request, res: Response): void {
