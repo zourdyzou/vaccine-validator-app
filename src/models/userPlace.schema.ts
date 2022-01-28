@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { schemaOptions } from '@/utils/schemaOptions';
+import { UserPlaceDocument } from '@/interfaces/root';
 
 const Schema = mongoose.Schema;
 
@@ -19,4 +20,4 @@ const userPlaceSchema = new mongoose.Schema(
   schemaOptions
 );
 
-export default mongoose.model('UserPlace', userPlaceSchema);
+export default mongoose.model<UserPlaceDocument>('UserPlace', userPlaceSchema);

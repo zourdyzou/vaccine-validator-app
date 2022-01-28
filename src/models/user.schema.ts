@@ -1,5 +1,6 @@
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 import { schemaOptions } from '@/utils/schemaOptions';
+import { UserDocument } from '@/interfaces/root';
 
 const userSchema = new mongoose.Schema(
   {
@@ -24,4 +25,4 @@ const userSchema = new mongoose.Schema(
   schemaOptions
 );
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model<UserDocument>('User', userSchema);

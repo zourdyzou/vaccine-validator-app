@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { schemaOptions } from '@/utils/schemaOptions';
+import { AdminDocument } from '@/interfaces/root';
 
 const adminSchema = new mongoose.Schema(
   {
@@ -16,4 +17,4 @@ const adminSchema = new mongoose.Schema(
   schemaOptions
 );
 
-export default mongoose.model('Admin', adminSchema);
+export default mongoose.model<AdminDocument>('Admin', adminSchema);

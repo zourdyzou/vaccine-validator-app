@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { schemaOptions } from '@/utils/schemaOptions';
+import { VaccineDocument } from '@/interfaces/root';
 
 const vaccineSchema = new mongoose.Schema(
   {
@@ -11,4 +12,4 @@ const vaccineSchema = new mongoose.Schema(
   schemaOptions
 );
 
-export default mongoose.model('Vaccine', vaccineSchema);
+export default mongoose.model<VaccineDocument>('Vaccine', vaccineSchema);

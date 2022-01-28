@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { schemaOptions } from '@/utils/schemaOptions';
+import { PlaceDocument } from '@/interfaces/root';
 
 const Schema = mongoose.Schema;
 
@@ -22,4 +23,4 @@ const placeSchema = new mongoose.Schema(
   schemaOptions
 );
 
-export default mongoose.model('Place', placeSchema);
+export default mongoose.model<PlaceDocument>('Place', placeSchema);
