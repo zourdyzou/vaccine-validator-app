@@ -1,9 +1,9 @@
 import express from 'express';
 import mongoose from 'mongoose';
 export interface Controllers {
-  create(): void;
-  update(): void;
-  delete(): void;
+  create(req: express.Request, res: express.Response): void;
+  update(req: express.Request, res: express.Response): void;
+  delete(req: express.Request, res: express.Response): void;
 }
 
 export interface AdminController {
