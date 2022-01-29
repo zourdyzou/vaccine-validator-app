@@ -5,6 +5,7 @@ import {
   User,
   UserVaccine,
   UserPlace,
+  Place,
 } from '@/models/schemas';
 import {
   TypedRequest,
@@ -225,25 +226,65 @@ class UserController extends UserInterface {
     }
   }
 
+  // handling the place that user visit to do some vaccination and track it
   public async getAllPlace(
     req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
     res: Response<any, Record<string, any>>
   ): Promise<void> {
-    throw new Error('Method not implemented.');
+    try {
+      const listPlace = await Place.find({
+        creator: req.params.userId,
+      });
+
+      res.status(200).json({
+        message: 'get list of all vaccination place successfully',
+        lists: listPlace,
+      });
+      return;
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 
   public async checkinPlace(
     req: TypedRequest<{ placeId: string }>,
     res: Response<any, Record<string, any>>
   ): Promise<void> {
-    throw new Error('Method not implemented.');
+    try {
+      const newVisitVaccination = new UserPlace({
+        user: req?.user?._id,
+        place: req.body.placeId,
+      });
+
+      const savedUserPlace = await newVisitVaccination.save();
+      res.status(201).json({
+        message: 'checked in for vaccination completed!',
+        user_data: savedUserPlace,
+      });
+
+      return;
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 
   public async placeVisited(
     req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
     res: Response<any, Record<string, any>>
   ): Promise<void> {
-    throw new Error('Method not implemented.');
+    try {
+      const listVisitedPlace = await UserPlace.find({
+        user: req.params.userId,
+      }).populate('place');
+
+      res.status(200).json({
+        message: 'listing of visited place',
+        visited_places: listVisitedPlace,
+      });
+      return;
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 }
 
