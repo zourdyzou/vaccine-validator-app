@@ -67,7 +67,8 @@ export interface VaccineLOTDocument extends mongoose.Document {
   vaccine: VaccineDocument['_id'];
 }
 
-export interface UserVaccineDocument extends mongoose.Document {
+export interface UserVaccineDocument
+  extends DocumentResult<UserVaccineDocument> {
   user: UserDocument['_id'];
   vaccine: VaccineDocument['_id'];
   vaccineLot: VaccineLOTDocument['_id'];

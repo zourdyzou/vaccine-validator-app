@@ -1,5 +1,11 @@
 import jwt from 'jsonwebtoken';
-import { User, UserVaccine, UserPlace } from '@/models/schemas';
+import {
+  Vaccine,
+  VaccineLot,
+  User,
+  UserVaccine,
+  UserPlace,
+} from '@/models/schemas';
 import {
   TypedRequest,
   UserController as UserInterface,
@@ -180,7 +186,43 @@ class UserController extends UserInterface {
     }>,
     res: Response<any, Record<string, any>>
   ): Promise<void> {
-    throw new Error('Method not implemented.');
+    try {
+      const { userId, vaccineId, vaccineLotId } = req.body;
+
+      const newVaccine = new UserVaccine({
+        user: userId,
+        vaccine: vaccineId,
+        vaccineLot: vaccineLotId,
+      });
+
+      const savedUserVaccine = await newVaccine.save();
+
+      await VaccineLot.findOneAndUpdate(
+        {
+          _id: vaccineLotId,
+        },
+        {
+          $inc: {
+            vaccinated: +1,
+          },
+        }
+      );
+
+      savedUserVaccine._doc.vaccine = await Vaccine.findById(vaccineId);
+      savedUserVaccine._doc.vaccineLot = await VaccineLot.findById(
+        vaccineLotId
+      );
+
+      res.status(200).json({
+        message: 'successfully updated user, vaccination updated!',
+        savedUserVaccine,
+      });
+      return;
+    } catch (error) {
+      res.status(500).json({
+        message: error.message,
+      });
+    }
   }
 
   public async getAllPlace(
