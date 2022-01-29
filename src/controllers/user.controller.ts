@@ -65,12 +65,58 @@ class UserController extends UserInterface {
     }
   }
 
-  public update(req: Request, res: Response): Promise<void> {
-    throw new Error('Method not implemented.');
+  public async update(
+    req: TypedRequest<UserDocument>,
+    res: Response
+  ): Promise<void> {
+    const { phoneNumber, idNumber } = req.body;
+
+    try {
+      let user = await User.findOne({ phoneNumber });
+      if (user && user._id.toString() !== req.params.id) {
+        res.status(403).json({
+          message: 'phone number is already registered for another account!',
+          statusText: 'ERROR',
+        });
+        return;
+      }
+
+      user = await User.findOne({ idNumber });
+      if (user && user._id.toString() !== req.params.id) {
+        res.status(403).json({
+          message: 'ID number is already registered for another account!',
+          statusText: 'ERROR',
+        });
+        return;
+      }
+
+      const updateUser = await User.findByIdAndUpdate(req.params.id, {
+        $set: req.body,
+      });
+
+      res.status(200).json({
+        message: 'successfully update user',
+        updated_user: updateUser,
+      });
+      return;
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 
-  public delete(req: Request, res: Response): Promise<void> {
-    throw new Error('Method not implemented.');
+  public async delete(req: Request, res: Response): Promise<void> {
+    try {
+      const { id } = req.params;
+
+      await UserVaccine.deleteMany({ user: id });
+      await UserPlace.deleteMany({ user: id });
+      await User.findByIdAndDelete(id);
+
+      res.status(200).json({ message: 'deleted successfully!' });
+      return;
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
 
   public async getSingleUser(
