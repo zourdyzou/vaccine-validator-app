@@ -4,8 +4,8 @@
   "description": "vaccine application prototype for Polish Government Vaccine Passport management, this is not the actual application that I am  currently working on, this is just the prototype of the application and the purpose behind that is to show off my project to the recruiter out there, somewhere... :-)",
   "main": "./src/server.ts",
   "scripts": {
-    "start": "ts-node ./src/server.ts",
-    "server": "nodemon --exec ts-node ./src/server.ts",
+    "server": "ts-node ./src/server.ts",
+    "server:watch": "nodemon --exec ts-node ./src/server.ts",
     "prepare": "husky install"
   },
   "keywords": [],
