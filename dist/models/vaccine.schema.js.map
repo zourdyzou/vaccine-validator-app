@@ -1,0 +1,1 @@
+{"version":3,"file":"vaccine.schema.js","sourceRoot":"","sources":["../../src/models/vaccine.schema.ts"],"names":[],"mappings":";;;;;AAAA,wDAAgC;AAChC,yDAAsD;AAGtD,MAAM,aAAa,GAAG,IAAI,kBAAQ,CAAC,MAAM,CACvC;IACE,IAAI,EAAE;QACJ,IAAI,EAAE,MAAM;QACZ,QAAQ,EAAE,IAAI;KACf;CACF,EACD,6BAAa,CACd,CAAC;AAEF,kBAAe,kBAAQ,CAAC,KAAK,CAAkB,SAAS,EAAE,aAAa,CAAC,CAAC"}
