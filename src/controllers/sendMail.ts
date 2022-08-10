@@ -31,12 +31,12 @@ const sendMail = (to: string, url: string, text: string) => {
   const mailOptions = {
     from: process.env.SENDER_EMAIL_ADDRESS!,
     to: to,
-    subject: 'DevAT Channel',
+    subject: 'Your Vaccine Validator Request',
     html: `
         <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
-        <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the DevAT channel.</h2>
-        <p>Congratulations! You're almost set to start using DEVAT✮SHOP.
-            Just click the button below to validate your email address.
+        <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the Department of Health and Sanitation Republic of Poland.</h2>
+        <p>Congratulations! Your request has been collectively added into our system
+            For the confirmation please click the button below to validate your email address. Thank you and stay safe
         </p>
         
         <a href=${url} style="background: crimson; text-decoration: none; color: white; padding: 10px 20px; margin: 10px 0; display: inline-block;">${text}</a>
