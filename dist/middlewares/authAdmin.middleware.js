@@ -4,12 +4,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authAdminMiddleware = void 0;
-const user_schema_1 = __importDefault(require("@/models/user.schema"));
+const admin_schema_1 = __importDefault(require("@/admin.schema"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const tokenDecode = (req) => {
+    const bearerHeader = req.headers['authorization'];
+    if (bearerHeader) {
+        const bearer = bearerHeader.split(' ')[1];
+        try {
+            return jsonwebtoken_1.default.verify(bearer, process.env.TOKEN_SECRET_KEY);
+        }
+        catch (err) {
+            return false;
+        }
+    }
+    else {
+        return false;
+    }
+};
 const authAdminMiddleware = async (req, res, next) => {
-    var _a;
     try {
-        const user = await user_schema_1.default.findOne({ _id: (_a = req.user) === null || _a === void 0 ? void 0 : _a.id });
-        if ((user === null || user === void 0 ? void 0 : user.role) !== 1) {
+        const tokenDecoded = tokenDecode(req);
+        const admin = await admin_schema_1.default.findById(tokenDecoded.id);
+        if (!admin) {
             return res.status(403).json({
                 message: 'you are forbidden to access the materials! access denied',
             });
