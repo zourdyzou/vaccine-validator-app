@@ -6,8 +6,11 @@
   "scripts": {
     "server": "ts-node ./src/server.ts",
     "server:watch": "nodemon --exec ts-node ./src/server.ts",
-    "build": "tsc",
-    "prepare": "husky install"
+    "build": "rimraf dist && tsc --build",
+    "start": "npm run server",
+    "postinstall": "rimraf dist && tsc",
+    "prepare": "husky install",
+    "lint:fix": "eslint --fix  --ext .ts ."
   },
   "keywords": [],
   "author": "Muhammad Zourdy",

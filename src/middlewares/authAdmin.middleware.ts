@@ -23,7 +23,7 @@ export const authAdminMiddleware = async (
   next: NextFunction
 ) => {
   try {
-    const tokenDecoded = tokenDecode(req) as { id: string };
+    const tokenDecoded = tokenDecode(req) as Pick<Payload, 'id'>;
     const admin = await AdminSchema.findById(tokenDecoded.id);
     // const user = await AdminSchema.findOne({ _id: req.user?.id });
 

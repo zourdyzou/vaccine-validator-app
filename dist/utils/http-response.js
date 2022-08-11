@@ -9,5 +9,4 @@ exports.HttpResponse = {
     NOT_FOUND: { code: 404, status: 'NOT_FOUND' },
     INTERNAL_SERVER_ERROR: { code: 500, status: 'INTERNAL_SERVER_ERROR' },
 };
-console.log('response-test', exports.HttpResponse.OK);
 //# sourceMappingURL=http-response.js.map

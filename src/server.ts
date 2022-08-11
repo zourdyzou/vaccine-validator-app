@@ -23,7 +23,7 @@ import helmet from 'helmet';
   });
 
   // connect to db
-  const URI = process.env.MONGODB_URL ?? '';
+  const URI = process.env.MONGODB_URI_CLOUD!;
   mongoose.connect(
     URI,
     {
@@ -37,7 +37,7 @@ import helmet from 'helmet';
     }
   );
 
-  const PORT = process.env.PORT ?? 5000;
+  const PORT = process.env.PORT ?? 4000;
   app.listen(PORT, () => {
     console.log(`server is running on port:${PORT}`);
   });
