@@ -7,14 +7,11 @@ import {
   Vaccine,
   VaccineLot,
 } from '@/models/schemas';
-import {
-  TypedRequest,
-  UserController as UserInterface,
-} from '@/interfaces/user.interface';
+import { UserController as UserInterface } from '@/interfaces/user.interface';
 import { Request, Response } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
-import { UserDocument } from '@/interfaces/root';
+import { UserDocument, TypedRequest } from '@/interfaces/root';
 
 class UserController extends UserInterface {
   public async create(

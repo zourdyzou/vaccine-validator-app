@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request } from 'express';
 import mongoose from 'mongoose';
 export interface Controllers {
   create(req: express.Request, res: express.Response): void;
@@ -10,8 +10,10 @@ interface DocumentResult<A> extends mongoose.Document {
   _doc: A;
 }
 
-export interface TypedRequest<T> extends express.Request {
+export interface TypedRequest<T> extends Request {
   body: T;
+  user?: UserDocument;
+  admin?: AdminDocument;
 }
 
 export interface AdminDocument extends mongoose.Document {

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { AdminDocument, Controllers, UserDocument } from './root';
+import { Controllers } from './root';
+import { TypedRequest } from './root';
 
 export abstract class UserController implements Controllers {
   public abstract create(req: Request, res: Response): Promise<void>;
@@ -21,12 +22,6 @@ export abstract class UserController implements Controllers {
     res: Response
   ): Promise<void>;
   public abstract placeVisited(req: Request, res: Response): Promise<void>;
-}
-
-export interface TypedRequest<T> extends Request {
-  body: T;
-  user?: UserDocument;
-  admin?: AdminDocument;
 }
 
 export interface Payload {
