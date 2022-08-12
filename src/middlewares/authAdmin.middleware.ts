@@ -1,7 +1,8 @@
 import AdminSchema from '@/admin.schema';
 import { NextFunction, Response } from 'express';
-import { Payload, TypedRequest } from '@interfaces/user.interface';
+import { Payload } from '@interfaces/user.interface';
 import jsonwebtoken from 'jsonwebtoken';
+import { TypedRequest } from '@interfaces/root';
 
 export const tokenDecode = (req: TypedRequest<Payload>) => {
   const bearerHeader = req.headers['authorization'];
