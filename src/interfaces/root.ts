@@ -17,8 +17,8 @@ export interface TypedRequest<T> extends express.Request {
 export interface AdminDocument extends mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
-  username: string;
-  password: string;
+  username: string | any;
+  password: string | any;
 }
 
 export interface UserDocument extends DocumentResult<UserDocument> {
@@ -79,12 +79,12 @@ export interface AdminInterface {
 
 export abstract class AdminInterfaceController implements AdminInterface {
   public abstract login(
-    req: TypedRequest<any>,
+    req: TypedRequest<AdminDocument>,
     res: express.Response
   ): Promise<void>;
 
   public abstract summary(
-    req: TypedRequest<any>,
+    req: TypedRequest<AdminDocument>,
     res: express.Response
   ): Promise<void>;
 }
