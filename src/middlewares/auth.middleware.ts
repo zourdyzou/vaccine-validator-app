@@ -5,9 +5,6 @@ import { Payload } from '@interfaces/user.interface';
 interface TypedRequest extends Request {
   user: Payload;
 }
-interface TypedRequest extends Request {
-  user: Payload;
-}
 
 export const authMiddleware = (
   req: TypedRequest,
