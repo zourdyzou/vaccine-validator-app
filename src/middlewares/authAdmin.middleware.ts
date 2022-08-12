@@ -3,7 +3,7 @@ import { NextFunction, Response } from 'express';
 import { Payload, TypedRequest } from '@interfaces/user.interface';
 import jsonwebtoken from 'jsonwebtoken';
 
-const tokenDecode = (req: TypedRequest<Payload>) => {
+export const tokenDecode = (req: TypedRequest<Payload>) => {
   const bearerHeader = req.headers['authorization'];
   if (bearerHeader) {
     const bearer = bearerHeader.split(' ')[1];
