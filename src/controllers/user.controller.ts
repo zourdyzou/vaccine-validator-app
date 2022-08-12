@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
 import {
+  Place,
+  User,
+  UserPlace,
+  UserVaccine,
   Vaccine,
   VaccineLot,
-  User,
-  UserVaccine,
-  UserPlace,
-  Place,
 } from '@/models/schemas';
 import {
   TypedRequest,
@@ -127,8 +127,8 @@ class UserController extends UserInterface {
   }
 
   public async getSingleUser(
-    req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
-    res: Response<any, Record<string, any>>
+    req: Request<ParamsDictionary, any, any, ParsedQs>,
+    res: Response
   ): Promise<void> {
     try {
       const user = (await User.findById(req.params.id)) as UserDocument;
@@ -154,18 +154,16 @@ class UserController extends UserInterface {
   }
 
   public async getAllUser(
-    _req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
-    res: Response<any, Record<string, any>>
+    _req: Request<ParamsDictionary, any, any, ParsedQs>,
+    res: Response
   ): Promise<void> {
     try {
       const list = await User.find({}).sort('-createdAt');
 
       for (const user of list) {
-        const vaccine = await UserVaccine.find({
+        user._doc.vaccine = await UserVaccine.find({
           user: user._id,
         }).sort('-createdAt');
-
-        user._doc.vaccine = vaccine;
       }
 
       res
@@ -185,7 +183,7 @@ class UserController extends UserInterface {
       vaccineId: string;
       vaccineLotId: string;
     }>,
-    res: Response<any, Record<string, any>>
+    res: Response
   ): Promise<void> {
     try {
       const { userId, vaccineId, vaccineLotId } = req.body;
@@ -228,8 +226,8 @@ class UserController extends UserInterface {
 
   // handling the place that user visit to do some vaccination and track it
   public async getAllPlace(
-    req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
-    res: Response<any, Record<string, any>>
+    req: Request<ParamsDictionary, any, any, ParsedQs>,
+    res: Response
   ): Promise<void> {
     try {
       const listPlace = await Place.find({
@@ -248,7 +246,7 @@ class UserController extends UserInterface {
 
   public async checkinPlace(
     req: TypedRequest<{ placeId: string }>,
-    res: Response<any, Record<string, any>>
+    res: Response
   ): Promise<void> {
     try {
       const newVisitVaccination = new UserPlace({
@@ -269,8 +267,8 @@ class UserController extends UserInterface {
   }
 
   public async placeVisited(
-    req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
-    res: Response<any, Record<string, any>>
+    req: Request<ParamsDictionary, any, any, ParsedQs>,
+    res: Response
   ): Promise<void> {
     try {
       const listVisitedPlace = await UserPlace.find({

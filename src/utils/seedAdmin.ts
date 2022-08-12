@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js';
-import AdminSchema from '@/models/admin.schema';
+import AdminSchema from '@/admin.schema';
 
-export const createAdmin = async (): Promise<any> => {
+export async function createAdmin(): Promise<any> {
   const username = process.env.DEFAULT_ADMIN_USERNAME!;
   const password = process.env.DEFAULT_ADMIN_PASSWORD!;
 
@@ -25,8 +25,9 @@ export const createAdmin = async (): Promise<any> => {
     console.log(`Username => ${username}`);
     console.log(`Password => ${password}`);
     console.log('--------------------------');
-    return await newAdmin.save();
+    await newAdmin.save();
+    return;
   } catch (error) {
     console.error(error);
   }
-};
+}

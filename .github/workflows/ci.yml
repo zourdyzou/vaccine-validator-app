@@ -5,16 +5,12 @@ on:
   pull_request:
     branches: [ main ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  test_and_build:
-    # The type of runner that the job will run on
+  build:
     name: Test and build the project
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check out Git repository
         uses: actions/checkout@v3
 
@@ -23,11 +19,9 @@ jobs:
         with:
           node-version-file: '.nvmrc'
 
-      # Install deps
       - name: Install Node deps
         run: npm i
 
-      # Run project linter
       - name: Run ESLint
         uses: wearerequired/lint-action@v2.0.1
         with:
@@ -39,18 +33,14 @@ jobs:
       - name: Fix Linting
         run: npm run lint:fix
 
-      # Run build
       - name: Build
         run: npm run build
 
   code_coverage_check:
-    # The type of runner that the job will run on
     name: Check the code coverage quality
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check out Git repository
         uses: actions/checkout@v3
 

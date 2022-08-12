@@ -29,7 +29,7 @@
       "@models/*": ["./src/models/*"],
       "@routes/*": ["./src/routes/*"],
       "@controllers/*": ["./src/controllers/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
     }
   },
   "exclude": ["node_modules"],
