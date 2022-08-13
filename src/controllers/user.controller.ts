@@ -22,7 +22,7 @@ class UserController implements UserInterface {
       } & UserDocument
     >,
     res: Response
-  ): Promise<void> {
+  ) {
     const { phoneNumber, idNumber } = req.body;
 
     try {
@@ -62,17 +62,12 @@ class UserController implements UserInterface {
         user: savedUser,
         token,
       });
-
-      return;
     } catch (error) {
       res.status(500).json({ message: error });
     }
   }
 
-  public async update(
-    req: TypedRequest<UserDocument>,
-    res: Response
-  ): Promise<void> {
+  public async update(req: TypedRequest<UserDocument>, res: Response) {
     const { phoneNumber, idNumber } = req.body;
 
     try {
@@ -102,13 +97,12 @@ class UserController implements UserInterface {
         message: 'successfully update user',
         updated_user: updateUser,
       });
-      return;
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
   }
 
-  public async delete(req: Request, res: Response): Promise<void> {
+  public async delete(req: Request, res: Response) {
     try {
       const { id } = req.params;
 
@@ -117,7 +111,6 @@ class UserController implements UserInterface {
       await User.findByIdAndDelete(id);
 
       res.status(200).json({ message: 'deleted successfully!' });
-      return;
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -126,7 +119,7 @@ class UserController implements UserInterface {
   public async getSingleUser(
     req: Request<ParamsDictionary, any, any, ParsedQs>,
     res: Response
-  ): Promise<void> {
+  ) {
     try {
       const user = (await User.findById(req.params.id)) as UserDocument;
       const userVaccine = await UserVaccine.find({
@@ -153,7 +146,7 @@ class UserController implements UserInterface {
   public async getAllUser(
     _req: Request<ParamsDictionary, any, any, ParsedQs>,
     res: Response
-  ): Promise<void> {
+  ) {
     try {
       const list = await User.find({}).sort('-createdAt');
 
@@ -166,7 +159,6 @@ class UserController implements UserInterface {
       res
         .status(200)
         .json({ message: 'success getting all user', lists: list });
-      return;
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -181,7 +173,7 @@ class UserController implements UserInterface {
       vaccineLotId: string;
     }>,
     res: Response
-  ): Promise<void> {
+  ) {
     try {
       const { userId, vaccineId, vaccineLotId } = req.body;
 
@@ -213,7 +205,6 @@ class UserController implements UserInterface {
         message: 'successfully updated user, vaccination updated!',
         savedUserVaccine,
       });
-      return;
     } catch (error) {
       res.status(500).json({
         message: error.message,
@@ -225,7 +216,7 @@ class UserController implements UserInterface {
   public async getAllPlace(
     req: Request<ParamsDictionary, any, any, ParsedQs>,
     res: Response
-  ): Promise<void> {
+  ) {
     try {
       const listPlace = await Place.find({
         creator: req.params.userId,
@@ -235,7 +226,6 @@ class UserController implements UserInterface {
         message: 'get list of all vaccination place successfully',
         lists: listPlace,
       });
-      return;
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -244,7 +234,7 @@ class UserController implements UserInterface {
   public async checkinPlace(
     req: TypedRequest<{ placeId: string }>,
     res: Response
-  ): Promise<void> {
+  ) {
     try {
       const newVisitVaccination = new UserPlace({
         user: req?.user?._id,
@@ -256,8 +246,6 @@ class UserController implements UserInterface {
         message: 'checked in for vaccination completed!',
         user_data: savedUserPlace,
       });
-
-      return;
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -266,7 +254,7 @@ class UserController implements UserInterface {
   public async placeVisited(
     req: Request<ParamsDictionary, any, any, ParsedQs>,
     res: Response
-  ): Promise<void> {
+  ) {
     try {
       const listVisitedPlace = await UserPlace.find({
         user: req.params.userId,
@@ -276,7 +264,6 @@ class UserController implements UserInterface {
         message: 'listing of visited place',
         visited_places: listVisitedPlace,
       });
-      return;
     } catch (error) {
       res.status(500).json({ message: error.message });
     }

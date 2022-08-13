@@ -7,10 +7,7 @@ import { PlaceDocument, TypedRequest } from '@interfaces/root';
 import { PlaceInterfaceController } from '@interfaces/place.interface';
 
 class PlaceController implements PlaceInterfaceController {
-  public async create(
-    req: TypedRequest<PlaceDocument>,
-    res: express.Response
-  ): Promise<void> {
+  public async create(req: TypedRequest<PlaceDocument>, res: express.Response) {
     try {
       const newPlace = new PlaceSchema({
         ...req.body,
@@ -19,16 +16,12 @@ class PlaceController implements PlaceInterfaceController {
 
       const savedPlace = await newPlace.save();
       res.status(201).json(savedPlace);
-      return;
     } catch (error) {
       res.status(500).json(error);
     }
   }
 
-  public async delete(
-    req: TypedRequest<PlaceDocument>,
-    res: express.Response
-  ): Promise<void> {
+  public async delete(req: TypedRequest<PlaceDocument>, res: express.Response) {
     try {
       await UserPlaceSchema.deleteMany({ place: req.params.id });
       await PlaceSchema.findOneAndDelete({
@@ -37,7 +30,6 @@ class PlaceController implements PlaceInterfaceController {
       });
 
       res.status(200).json({ message: 'Deleted successfully!' });
-      return;
     } catch (error) {
       res.status(500).json(error);
     }
@@ -46,7 +38,7 @@ class PlaceController implements PlaceInterfaceController {
   public async getAllPlace(
     _req: TypedRequest<PlaceDocument>,
     res: express.Response
-  ): Promise<void> {
+  ) {
     try {
       const list = await PlaceSchema.find({})
         .populate('creator')
@@ -60,8 +52,6 @@ class PlaceController implements PlaceInterfaceController {
         });
       }
       res.status(200).json(list);
-
-      return;
     } catch (error) {
       res.status(500).json(error);
     }
@@ -70,7 +60,7 @@ class PlaceController implements PlaceInterfaceController {
   public async getSinglePlace(
     req: TypedRequest<PlaceDocument>,
     res: express.Response
-  ): Promise<void> {
+  ) {
     try {
       const place = await PlaceSchema.findById(req.params.id).populate(
         'creator'
@@ -84,16 +74,12 @@ class PlaceController implements PlaceInterfaceController {
       }).populate('user');
 
       res.status(200).json(place);
-      return;
     } catch (error) {
       res.status(500).json(error);
     }
   }
 
-  public async update(
-    req: TypedRequest<PlaceDocument>,
-    res: express.Response
-  ): Promise<void> {
+  public async update(req: TypedRequest<PlaceDocument>, res: express.Response) {
     try {
       const place = await PlaceSchema.findOneAndUpdate(
         {
@@ -105,7 +91,6 @@ class PlaceController implements PlaceInterfaceController {
         }
       );
       res.status(200).json(place);
-      return;
     } catch (error) {
       res.status(500).json(error);
     }

@@ -2,9 +2,9 @@ import jwt from 'jsonwebtoken';
 import CryptoJs from 'crypto-js';
 import express from 'express';
 
-import AdminSchema from '@/models/admin.schema';
 import UserSchema from '@/models/user.schema';
 import PlaceSchema from '@/models/place.schema';
+import AdminSchema from '@/models/admin.schema';
 import VaccineLotSchema from '@/models/vaccineLot.schema';
 import UserVaccineSchema from '@/models/userVaccine.schema';
 
