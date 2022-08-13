@@ -51,9 +51,12 @@ export interface UserPlaceDocument extends mongoose.Document {
   place: PlaceDocument['_id'];
 }
 
-export interface VaccineDocument extends mongoose.Document {
+export interface VaccineDocument extends DocumentResult<VaccineDocument> {
   createdAt: Date;
   updatedAt: Date;
+  quantity: number;
+  vaccinated: number;
+  vaccineLot: VaccineLOTDocument[] | any;
   name: string;
 }
 
