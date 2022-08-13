@@ -5,33 +5,33 @@ import { verfiyAdminMiddleware } from '@/middlewares/authAdmin.middleware';
 
 import { userController } from '@controllers/user.controller';
 
-const router = express.Router();
+const userRouter = express.Router();
 
-router.post(
+userRouter.post(
   '/',
   verfiyAdminMiddleware,
   userController.create as RequestHandler
 );
 
-router.get(
+userRouter.get(
   '/',
   verfiyAdminMiddleware,
   userController.getAllUser as RequestHandler
 );
 
-router.get(
+userRouter.get(
   '/:id',
   verfiyAdminMiddleware,
   userController.getSingleUser as RequestHandler
 );
 
-router.put(
+userRouter.put(
   '/:id',
   verfiyAdminMiddleware,
   userController.update as RequestHandler
 );
 
-router.delete(
+userRouter.delete(
   '/:id',
   verfiyAdminMiddleware,
   userController.delete as RequestHandler
@@ -39,29 +39,29 @@ router.delete(
 
 // add vaccination to user that has been vaccinated
 
-router.post(
+userRouter.post(
   '/vaccinated',
   verfiyAdminMiddleware,
   userController.vaccinated as RequestHandler
 );
 
-router.get(
+userRouter.get(
   '/:userId/place',
   verifyTokenMiddleware,
   userController.getAllPlace as RequestHandler
 );
 
-router.post(
+userRouter.post(
   '/checkin-place',
   verifyTokenMiddleware,
   userController.checkinPlace as RequestHandler
 );
 
 // place that user visited
-router.get(
+userRouter.get(
   '/:userId/place-visited',
   verifyTokenMiddleware,
   userController.placeVisited as RequestHandler
 );
 
-export default router;
+export default userRouter;

@@ -5,37 +5,37 @@ import { verfiyAdminMiddleware } from '@/middlewares/authAdmin.middleware';
 
 import { placeController } from '@controllers/place.controller';
 
-const router = express.Router();
+const placeRouter = express.Router();
 
 // place created by user
-router.post(
+placeRouter.post(
   '/',
   verifyTokenMiddleware,
   placeController.create as RequestHandler
 );
 
-router.get(
+placeRouter.get(
   '/',
   verfiyAdminMiddleware,
   placeController.getAllPlace as RequestHandler
 );
 
-router.get(
+placeRouter.get(
   '/:id',
   verifyTokenMiddleware,
   placeController.getSinglePlace as RequestHandler
 );
 
-router.put(
+placeRouter.put(
   '/:id',
   verifyTokenMiddleware,
   placeController.update as RequestHandler
 );
 
-router.delete(
+placeRouter.delete(
   '/:id',
   verifyTokenMiddleware,
   placeController.delete as RequestHandler
 );
 
-export default router;
+export default placeRouter;
