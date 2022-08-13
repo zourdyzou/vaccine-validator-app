@@ -8,10 +8,7 @@ import VaccineLotSchema from '@models/vaccineLot.schema';
 import UserVaccineSchema from '@models/userVaccine.schema';
 
 class VaccineController extends VaccineInterfaceController {
-  public async create(
-    req: TypedRequest<VaccineDocument>,
-    res: Response
-  ): Promise<void> {
+  public async create(req: TypedRequest<VaccineDocument>, res: Response) {
     try {
       const newVaccine = new VaccineSchema({
         name: req.body.name,
@@ -23,24 +20,18 @@ class VaccineController extends VaccineInterfaceController {
       savedVaccine._doc.vaccineLot = [];
 
       res.status(201).json(savedVaccine);
-
-      return;
     } catch (error) {
       res.status(500).json(error);
     }
   }
 
-  public async delete(
-    req: TypedRequest<VaccineDocument>,
-    res: Response
-  ): Promise<void> {
+  public async delete(req: TypedRequest<VaccineDocument>, res: Response) {
     try {
       await VaccineLotSchema.deleteMany({ vaccine: req.params.id });
       await UserVaccineSchema.deleteMany({ vaccine: req.params.id });
       await VaccineSchema.findByIdAndDelete(req.params.id);
 
       res.status(200).json({ message: 'Deleted successfully' });
-      return;
     } catch (error) {
       res.status(500).json(error);
     }
@@ -49,7 +40,7 @@ class VaccineController extends VaccineInterfaceController {
   public async getAllVaccine(
     _req: TypedRequest<VaccineDocument>,
     res: Response
-  ): Promise<void> {
+  ) {
     try {
       const list = await VaccineSchema.find({}).sort('-createdAt');
 
@@ -70,7 +61,6 @@ class VaccineController extends VaccineInterfaceController {
       }
 
       res.status(200).json(list);
-      return;
     } catch (error) {
       res.status(500).json(error);
     }
@@ -79,7 +69,7 @@ class VaccineController extends VaccineInterfaceController {
   public async getSingleVaccine(
     req: TypedRequest<VaccineDocument>,
     res: Response
-  ): Promise<void> {
+  ) {
     try {
       const vaccine = (await VaccineSchema.findById(
         req.params.id
@@ -97,17 +87,12 @@ class VaccineController extends VaccineInterfaceController {
       vaccine._doc.vaccineLot = vaccineLots;
 
       res.status(200).json(vaccine);
-
-      return;
     } catch (error) {
       res.status(500).json(error);
     }
   }
 
-  public async update(
-    req: TypedRequest<VaccineDocument>,
-    res: Response
-  ): Promise<void> {
+  public async update(req: TypedRequest<VaccineDocument>, res: Response) {
     try {
       const vaccine = await VaccineSchema.findByIdAndUpdate(req.params.id, {
         $set: req.body,
@@ -116,8 +101,6 @@ class VaccineController extends VaccineInterfaceController {
       res
         .status(200)
         .json({ message: 'Request to update has been granted!', vaccine });
-
-      return;
     } catch (error) {
       res.status(500).json(error);
     }

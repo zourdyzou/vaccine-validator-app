@@ -18,7 +18,7 @@ export const tokenDecode = (req: TypedRequest<Payload>) => {
   }
 };
 
-export const authAdminMiddleware = async (
+export const verfiyAdminMiddleware = async (
   req: TypedRequest<Payload>,
   res: Response,
   next: NextFunction
@@ -26,7 +26,6 @@ export const authAdminMiddleware = async (
   try {
     const tokenDecoded = tokenDecode(req) as Pick<Payload, 'id'>;
     const admin = await AdminSchema.findById(tokenDecoded.id);
-    // const user = await AdminSchema.findOne({ _id: req.user?.id });
 
     if (!admin) {
       return res.status(403).json({
