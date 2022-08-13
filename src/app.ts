@@ -12,8 +12,6 @@ import { normalizePort } from '@utils/port-runtime-utilities';
 
 import appRouter from '@/router/routes';
 
-// import fileUpload from 'express-fileupload';
-
 const app = express();
 
 (() => {
