@@ -8,11 +8,8 @@ import PlaceSchema from '@/place.schema';
 import VaccineLotSchema from '@/vaccineLot.schema';
 import UserVaccineSchema from '@/userVaccine.schema';
 
-import {
-  AdminDocument,
-  AdminInterfaceController,
-  TypedRequest,
-} from '@interfaces/root';
+import { AdminDocument, TypedRequest } from '@interfaces/root';
+import { AdminInterfaceController } from '@interfaces/admin.interface';
 
 class AdminController extends AdminInterfaceController {
   public async login(
