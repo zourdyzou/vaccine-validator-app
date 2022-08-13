@@ -1,14 +1,17 @@
 import 'dotenv/config';
-import express, { Request, Response } from 'express';
-import mongoose from 'mongoose';
+
 import cors from 'cors';
-import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import logger from 'morgan';
+import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
+import express, { Request, Response } from 'express';
+
 import { createAdmin } from '@utils/seedAdmin';
 import { normalizePort } from '@utils/port-runtime-utilities';
 
-// import path from 'path';
+import appRouter from '@/router/routes';
+
 // import fileUpload from 'express-fileupload';
 
 const app = express();
@@ -26,6 +29,8 @@ const app = express();
   app.get('/', (_req: Request, res: Response) => {
     res.send(' <div><h1>God bless humanity!</h1></div>  ');
   });
+
+  app.use('/api/', appRouter);
 
   // connect to db
   mongoose
