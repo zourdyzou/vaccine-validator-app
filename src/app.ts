@@ -22,7 +22,7 @@ const app = express();
   app.use(logger('dev'));
   app.use(express.urlencoded({ extended: false }));
 
-  // routes
+  // router
   app.get('/', (_req: Request, res: Response) => {
     res.send(' <div><h1>God bless humanity!</h1></div>  ');
   });

@@ -5,70 +5,70 @@ import { verfiyAdminMiddleware } from '@/middlewares/authAdmin.middleware';
 import { vaccineController } from '@controllers/vaccine.controller';
 import { vaccineLotController } from '@controllers/vaccine-lot.controller';
 
-const vaccineRouter = express.Router();
+const router = express.Router();
 
-vaccineRouter.post(
+router.post(
   '/',
   verfiyAdminMiddleware,
   vaccineController.create as RequestHandler
 );
 
-vaccineRouter.get(
+router.get(
   '/',
   verfiyAdminMiddleware,
   vaccineController.getAllVaccine as RequestHandler
 );
 
-vaccineRouter.get(
+router.get(
   '/:id',
   verfiyAdminMiddleware,
   vaccineController.getSingleVaccine as RequestHandler
 );
 
-vaccineRouter.put(
+router.put(
   '/:id',
   verfiyAdminMiddleware,
   vaccineController.update as RequestHandler
 );
 
-vaccineRouter.delete(
+router.delete(
   '/:id',
   verfiyAdminMiddleware,
   vaccineController.delete as RequestHandler
 );
 
 /**
- * Vaccine Lot vaccineRouter
+ * Vaccine Lot router
  */
 
-vaccineRouter.post(
+router.post(
   '/lots',
   verfiyAdminMiddleware,
   vaccineLotController.create as RequestHandler
 );
 
-vaccineRouter.get(
+router.get(
   '/lots/get-all',
   verfiyAdminMiddleware,
   vaccineLotController.getAllVaccineLot as RequestHandler
 );
 
-vaccineRouter.get(
+router.get(
   '/lots/:id',
   verfiyAdminMiddleware,
   vaccineLotController.getSingleVaccineLot as RequestHandler
 );
 
-vaccineRouter.put(
+router.put(
   '/lots/:id',
   verfiyAdminMiddleware,
   vaccineLotController.update as RequestHandler
 );
 
-vaccineRouter.delete(
+router.delete(
   '/lots/:id',
   verfiyAdminMiddleware,
   vaccineLotController.delete as RequestHandler
 );
 
-export default vaccineRouter;
+export default router;
