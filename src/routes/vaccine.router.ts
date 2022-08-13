@@ -70,3 +70,5 @@ router.delete(
   verfiyAdminMiddleware,
   vaccineLotController.delete as RequestHandler
 );
+
+export default router;
