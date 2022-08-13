@@ -66,6 +66,7 @@ export interface VaccineLOTDocument extends mongoose.Document {
   name: string;
   quantity: number;
   vaccinated: number;
+  vaccineId: number | VaccineDocument['_id'];
   vaccine: VaccineDocument['_id'];
 }
 
