@@ -23,8 +23,8 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@": ["./src", "./public"],
-      "@/*": ["./src/*", "./src/models/*", "./src/routes/*"],
+      "@": ["./src"],
+      "@/*": ["./src/*"],
       "@interfaces/*": ["./src/interfaces/*"],
       "@models/*": ["./src/models/*"],
       "@routes/*": ["./src/routes/*"],

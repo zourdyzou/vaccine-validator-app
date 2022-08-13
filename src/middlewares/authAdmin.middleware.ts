@@ -1,4 +1,4 @@
-import AdminSchema from '@/admin.schema';
+import AdminSchema from '@/models/admin.schema';
 import { NextFunction, Response } from 'express';
 import { Payload } from '@interfaces/user.interface';
 import jsonwebtoken from 'jsonwebtoken';

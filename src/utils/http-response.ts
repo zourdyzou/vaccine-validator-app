@@ -1,4 +1,15 @@
-export const HttpResponse = {
+type HttpResponseKey =
+  | 'OK'
+  | 'CREATED'
+  | 'NO_CONTENT'
+  | 'BAD_REQUEST'
+  | 'NOT_FOUND'
+  | 'INTERNAL_SERVER_ERROR';
+
+export const HttpResponse: Record<
+  HttpResponseKey,
+  { code: number; status: string }
+> = {
   OK: { code: 200, status: 'OK' },
   CREATED: { code: 201, status: 'CREATED' },
   NO_CONTENT: { code: 204, status: 'NO_CONTENT' },

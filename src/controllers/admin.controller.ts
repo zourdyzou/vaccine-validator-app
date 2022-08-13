@@ -2,11 +2,11 @@ import jwt from 'jsonwebtoken';
 import CryptoJs from 'crypto-js';
 import express from 'express';
 
-import AdminSchema from '@/admin.schema';
-import UserSchema from '@/user.schema';
-import PlaceSchema from '@/place.schema';
-import VaccineLotSchema from '@/vaccineLot.schema';
-import UserVaccineSchema from '@/userVaccine.schema';
+import AdminSchema from '@/models/admin.schema';
+import UserSchema from '@/models/user.schema';
+import PlaceSchema from '@/models/place.schema';
+import VaccineLotSchema from '@/models/vaccineLot.schema';
+import UserVaccineSchema from '@/models/userVaccine.schema';
 
 import { AdminDocument, TypedRequest } from '@interfaces/root';
 import { AdminInterfaceController } from '@interfaces/admin.interface';

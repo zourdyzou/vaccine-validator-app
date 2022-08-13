@@ -1,8 +1,8 @@
 import { tokenDecode } from '@/middlewares/authAdmin.middleware';
 import { Payload } from '@interfaces/user.interface';
 import { NextFunction, Response } from 'express';
-import AdminSchema from '@/admin.schema';
-import UserSchema from '@/user.schema';
+import AdminSchema from '@/models/admin.schema';
+import UserSchema from '@/models/user.schema';
 import { AdminDocument, UserDocument, TypedRequest } from '@interfaces/root';
 
 export const verifyTokenMiddleware = async (
