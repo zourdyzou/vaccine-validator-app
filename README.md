@@ -18,4 +18,5 @@ creating this prototype app only to show how the app works in general, and last 
 
     Soon
 
-# Preview (soon)
+# Preview 
+!["Build vaccine passport with MERN stack"](https://user-images.githubusercontent.com/67447840/146678597-8cc5173c-ea2e-40c5-a9f3-45dc37b1b1cc.png "Build vaccine passport with MERN stack")

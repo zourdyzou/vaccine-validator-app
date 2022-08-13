@@ -35,12 +35,13 @@ export interface UserDocument extends DocumentResult<UserDocument> {
   placeVisited?: UserPlaceDocument | any;
 }
 
-export interface PlaceDocument extends mongoose.Document {
+export interface PlaceDocument extends DocumentResult<PlaceDocument> {
   createdAt: Date;
   updatedAt: Date;
   name: string;
   address: string;
   creator: UserDocument['_id'];
+  userVisitLast24h: UserDocument | any;
 }
 
 export interface UserPlaceDocument extends mongoose.Document {
