@@ -17,7 +17,34 @@ export interface VaccineLotController extends Controllers {
     req: TypedRequest<VaccineLOTDocument>,
     res: Response
   ): void;
-  getAllVaccineLot(): void;
+  getAllVaccineLot(req: TypedRequest<VaccineLOTDocument>, res: Response): void;
+}
+
+export abstract class VaccineLotInterface implements VaccineLotController {
+  public abstract create(
+    req: TypedRequest<VaccineLOTDocument>,
+    res: Response
+  ): Promise<void>;
+
+  public abstract delete(
+    req: TypedRequest<VaccineLOTDocument>,
+    res: Response
+  ): Promise<void>;
+
+  public abstract getAllVaccineLot(
+    req: TypedRequest<VaccineLOTDocument>,
+    res: Response
+  ): Promise<void>;
+
+  public abstract getSingleVaccineLot(
+    req: TypedRequest<VaccineLOTDocument>,
+    res: Response
+  ): Promise<void>;
+
+  public abstract update(
+    req: TypedRequest<VaccineLOTDocument>,
+    res: Response
+  ): Promise<void>;
 }
 
 export abstract class VaccineInterfaceController implements VaccineController {
