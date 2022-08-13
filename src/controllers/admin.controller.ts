@@ -11,7 +11,7 @@ import UserVaccineSchema from '@/models/userVaccine.schema';
 import { AdminDocument, TypedRequest } from '@interfaces/root';
 import { AdminInterfaceController } from '@interfaces/admin.interface';
 
-class AdminController extends AdminInterfaceController {
+class AdminController implements AdminInterfaceController {
   public async login(
     req: TypedRequest<AdminDocument>,
     res: express.Response

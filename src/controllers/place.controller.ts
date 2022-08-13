@@ -6,7 +6,7 @@ import UserPlaceSchema from '@models/userPlace.schema';
 import { PlaceDocument, TypedRequest } from '@interfaces/root';
 import { PlaceInterfaceController } from '@interfaces/place.interface';
 
-class PlaceController extends PlaceInterfaceController {
+class PlaceController implements PlaceInterfaceController {
   public async create(
     req: TypedRequest<PlaceDocument>,
     res: express.Response

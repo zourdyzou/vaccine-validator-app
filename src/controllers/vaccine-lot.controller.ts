@@ -6,7 +6,7 @@ import { TypedRequest, VaccineLOTDocument } from '@interfaces/root';
 import VaccineLotSchema from '@models/vaccineLot.schema';
 import UserVaccineSchema from '@models/userVaccine.schema';
 
-class VaccineLotController extends VaccineLotInterface {
+class VaccineLotController implements VaccineLotInterface {
   public async create(
     req: TypedRequest<VaccineLOTDocument>,
     res: Response

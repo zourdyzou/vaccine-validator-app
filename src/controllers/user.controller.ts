@@ -13,7 +13,7 @@ import { ParamsDictionary } from 'express-serve-static-core';
 import { ParsedQs } from 'qs';
 import { UserDocument, TypedRequest } from '@/interfaces/root';
 
-class UserController extends UserInterface {
+class UserController implements UserInterface {
   public async create(
     req: TypedRequest<
       {

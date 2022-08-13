@@ -7,7 +7,7 @@ import VaccineSchema from '@models/vaccine.schema';
 import VaccineLotSchema from '@models/vaccineLot.schema';
 import UserVaccineSchema from '@models/userVaccine.schema';
 
-class VaccineController extends VaccineInterfaceController {
+class VaccineController implements VaccineInterfaceController {
   public async create(req: TypedRequest<VaccineDocument>, res: Response) {
     try {
       const newVaccine = new VaccineSchema({
