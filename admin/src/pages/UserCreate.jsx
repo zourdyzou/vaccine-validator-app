@@ -51,7 +51,7 @@ const UserCreate = () => {
       phoneNumber: phone,
       fullName: name,
       idNumber: idCard,
-      address: address.name,
+      address: address.city,
     };
 
     try {
