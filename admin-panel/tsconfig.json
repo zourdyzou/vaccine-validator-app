@@ -24,7 +24,9 @@
       "@/components/*": ["./components/*"],
       "@/utils/*": ["./utils/*"],
       "@/api/*": ["./api/*"],
-      "@/screens/*": ["./screens/*"]
+      "@/screens/*": ["./screens/*"],
+      "@/interfaces/*": ["./interfaces/*"],
+      "@/redux/*": ["./redux/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
