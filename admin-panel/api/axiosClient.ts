@@ -26,7 +26,7 @@ axiosClient.interceptors.response.use(
   },
   (err) => {
     if (!err.response) {
-      alert('Err! Netword err!');
+      alert('Error! there is something wrong with the network...');
     }
     throw err;
   }

@@ -2,11 +2,20 @@ import axiosClient from './axiosClient';
 
 const vaccineEndpoint = 'vaccine';
 
+interface VaccineApiParams {
+  // phoneNumber: string | number;
+  // fullName: string | number;
+  // idNumber: string | number;
+  // address: string;
+  name: string;
+}
+
 const vaccineApi = {
   getAllVaccine: () => axiosClient.get(vaccineEndpoint),
-  create: (params: any) => axiosClient.post(vaccineEndpoint, params),
+  create: (params: VaccineApiParams) =>
+    axiosClient.post(vaccineEndpoint, params),
   getSingleVaccine: (id: string) => axiosClient.get(`${vaccineEndpoint}/${id}`),
-  update: (id: string, params: any) =>
+  update: (id: string, params: Partial<VaccineApiParams>) =>
     axiosClient.put(`${vaccineEndpoint}/${id}`, params),
   delete: (id: string) => axiosClient.delete(`${vaccineEndpoint}/${id}`),
 };

@@ -1,7 +1,9 @@
 import * as React from 'react';
 import type { AppProps } from 'next/app';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import { ThemeProvider, CssBaseline, createTheme } from '@mui/material';
+import { ThemeProvider, CssBaseline, createTheme, Box } from '@mui/material';
+
+import { Loading } from '@/components/shared/Loading';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -23,9 +25,17 @@ const clientSideEmotionCache = createEmotionCache();
 const lightTheme = createTheme(lightThemeOptions);
 
 const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
+  // const { pathname } = useRouter();
+  const [isLoading, setIsLoading] = React.useState(false);
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  return (
+  return isLoading ? (
+    <Box sx={{ width: '100%', height: '100vh' }}>
+      <div className="flex items-center justify-center h-full">
+        <Loading />
+      </div>
+    </Box>
+  ) : (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={lightTheme}>
         <CssBaseline />
