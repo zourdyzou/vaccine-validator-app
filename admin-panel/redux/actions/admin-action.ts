@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 import { Dispatch } from 'react';
+import axios from 'axios';
 import {
   ClearError,
   IAdminSummaryFail,
@@ -8,7 +9,11 @@ import {
 } from '@/interfaces/admin-type-action';
 import { AdminSummaryType } from '@/redux/constants/admin-constant';
 import { adminApi } from '@/api/adminApi';
-import { IAdminSummaryData } from '@/interfaces/data-type';
+
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return error.message;
+  return String(error);
+}
 
 export const getSummary =
   () =>
@@ -24,12 +29,12 @@ export const getSummary =
 
       dispatch({
         type: AdminSummaryType.ADMIN_FETCH_SUMMARY_DATA_SUCCESS,
-        payload: adminSummaryData.data as IAdminSummaryData,
+        payload: adminSummaryData.data,
       });
     } catch (error) {
       dispatch({
         type: AdminSummaryType.ADMIN_FETCH_SUMMARY_DATA_FAIL,
-        payload: `Something is wrong: ${error}`,
+        payload: `Something is wrong: ${getErrorMessage(error)}`,
       });
     }
   };

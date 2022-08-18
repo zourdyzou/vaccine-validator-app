@@ -1,4 +1,5 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
+
 import Head from 'next/head';
 import {
   UsersIcon,
@@ -9,6 +10,11 @@ import VaccinesIcon from '@mui/icons-material/Vaccines';
 
 import DashboardLayout from '@/screens/layout/layout';
 import { CardStats } from '@/components/data-card/card-stats';
+
+import { wrapper } from '@/redux/store';
+
+import { getSummary } from '@/redux/actions/admin-action';
+import { AnyAction } from '@reduxjs/toolkit';
 
 const Home: NextPage = () => {
   return (
@@ -47,5 +53,10 @@ const Home: NextPage = () => {
     </>
   );
 };
+
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps(async ({ store }) => {
+    await store.dispatch(getSummary() as any);
+  });
 
 export default Home;

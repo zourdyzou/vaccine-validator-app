@@ -1,6 +1,6 @@
 import { HYDRATE, createWrapper } from 'next-redux-wrapper';
-import { configureStore } from '@reduxjs/toolkit';
-import { applyMiddleware, Middleware, CombinedState, AnyAction } from 'redux';
+import { AnyAction, configureStore } from '@reduxjs/toolkit';
+import { applyMiddleware, Middleware, CombinedState, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
@@ -27,11 +27,15 @@ const reducer = (
   return reducers(state, action);
 };
 
-const initializeStore = () =>
-  configureStore({
-    reducer,
-    middleware: [thunkMiddleware, logger],
-    devTools: true,
-  });
+export const store = configureStore({
+  reducer,
+  middleware: [thunkMiddleware, logger],
+  devTools: true,
+});
 
-export const wrapper = createWrapper(initializeStore);
+const initializeStoreWithToolkit = () =>
+  createStore(reducer, bindMiddleware([thunkMiddleware, logger]));
+
+export const wrapper = createWrapper(initializeStoreWithToolkit);
+
+export type AppDispatch = typeof store.dispatch;

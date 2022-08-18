@@ -30,9 +30,10 @@ const DashboardLayout: FunctionComponent<{ children: ReactNode }> = ({
                   <li key={`sidebar-${sidebarContent.text}`}>
                     <Link href={sidebarContent.path}>
                       <a
-                        className={`flex items-center px-4 py-2 mt-5 text-gray-600 rounded-md hover:bg-indigo-700 hover:text-white ${
-                          pathname === sidebarContent.path &&
-                          'bg-indigo-700 text-white'
+                        className={`flex items-center px-4 py-2 mt-5 text-white rounded-md hover:bg-indigo-700 ${
+                          pathname === sidebarContent.path
+                            ? 'bg-indigo-700'
+                            : ''
                         }`}
                       >
                         {sidebarContent.icon}

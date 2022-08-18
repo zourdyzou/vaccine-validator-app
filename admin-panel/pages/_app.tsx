@@ -13,6 +13,8 @@ import '@fontsource/roboto/700.css';
 import createEmotionCache from '../utils/createEmotionCache';
 import lightThemeOptions from '../styles/theme/lightThemeOptions';
 
+import { wrapper } from '@/redux/store';
+
 import 'normalize.css';
 import '../styles/globals.scss';
 
@@ -45,4 +47,4 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
   );
 };
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

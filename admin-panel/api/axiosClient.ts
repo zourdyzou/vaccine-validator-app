@@ -1,8 +1,10 @@
 import axios from 'axios';
 import queryString from 'query-string';
 
+const IS_SERVER = typeof window === 'undefined';
+
 const baseUrl = 'https://vaccine-validator-demo.herokuapp.com/api/';
-const getToken = () => localStorage.getItem('token');
+const getToken = () => !IS_SERVER && localStorage.getItem('token');
 
 const axiosClient = axios.create({
   baseURL: baseUrl,
@@ -26,7 +28,7 @@ axiosClient.interceptors.response.use(
   },
   (err) => {
     if (!err.response) {
-      alert('Error! there is something wrong with the network...');
+      console.error('Error! there is something wrong with the network...');
     }
     throw err;
   }
