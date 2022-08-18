@@ -92,6 +92,8 @@ const User = () => {
     },
   ];
 
+  console.log(userList.lists);
+
   return (
     <>
       <PageHeader

@@ -34,3 +34,25 @@ export interface IVaccineData {
   __v: number;
   _id: string;
 }
+
+export interface IUserData {
+  phoneNumber: string;
+  fullName: string;
+  idNumber: string;
+  address: string;
+  vaccine: IVaccineData[];
+  __v: number;
+  _id: string;
+  id: string;
+}
+
+export type TypedUserParams = Pick<
+  IUserData,
+  'phoneNumber' | 'fullName' | 'address' | 'idNumber'
+>;
+
+export interface IVaccinated {
+  userId: string;
+  vaccineId: string;
+  vaccineLotId: string;
+}

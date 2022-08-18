@@ -4,7 +4,9 @@ import {
 } from '@/redux/constants/admin-constant';
 import { IAdminSummaryData } from '@/interfaces/data-type';
 
-export type CLEAR_ERRORS = 'CLEAR_ERRORS';
+export enum ClearError {
+  CLEAR_ERRORS = 'CLEAR_ERRORS',
+}
 
 // admin authentication
 export interface IAdminAuthRequest {
@@ -40,7 +42,7 @@ export interface IAdminSummaryFail {
 }
 
 export interface IClearErrors {
-  type: CLEAR_ERRORS;
+  type: ClearError.CLEAR_ERRORS;
 }
 
 export type IAdminAction =
