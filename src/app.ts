@@ -28,7 +28,7 @@ const app = express();
     res.send(' <div><h1>God bless humanity!</h1></div>  ');
   });
 
-  app.use('/api-axios/', appRouter);
+  app.use('/api', appRouter);
 
   // connect to db
   mongoose

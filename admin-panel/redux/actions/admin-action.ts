@@ -7,7 +7,7 @@ import {
   IAdminSummarySuccess,
 } from '@/interfaces/admin-type-action';
 import { AdminSummaryType } from '@/redux/constants/admin-constant';
-import { adminApi } from '../../api-axios/adminApi';
+import { adminApi } from '@/axios/adminApi';
 import { IAdminSummaryData } from '@/interfaces/data-type';
 
 export function getErrorMessage(error: unknown) {

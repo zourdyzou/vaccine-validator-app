@@ -23,7 +23,7 @@ const authOptions: NextAuthOptions = {
         })) as unknown as IAdminLoginInfo;
 
         if (adminResponse) {
-          return { ...adminResponse, role: 'admin' };
+          return adminResponse;
         }
 
         return null;
@@ -34,7 +34,7 @@ const authOptions: NextAuthOptions = {
     signIn: '/login',
   },
 
-  secret: process.env.NEXT_PUBLIC_SECRET,
+  // secret: process.env.NEXT_PUBLIC_SECRET,
 
   callbacks: {
     async session({ session, token }) {
