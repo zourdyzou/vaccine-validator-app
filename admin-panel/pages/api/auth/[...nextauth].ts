@@ -2,7 +2,7 @@ import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import axios from 'axios';
 
-import { authApi } from '../../../api-axios/authApi';
+import { authApi } from '@/axios/authApi';
 import { NextApiHandler } from 'next';
 import { IAdminLoginInfo } from '@/interfaces/data-type';
 

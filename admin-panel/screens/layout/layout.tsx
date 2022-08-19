@@ -19,7 +19,7 @@ const DashboardLayout: FunctionComponent<{ children: ReactNode }> = ({
 }) => {
   const { pathname } = useRouter();
   const state = useAppSelector((state) => state.adminSummary);
-  const { status, data } = useSession();
+  const { status } = useSession();
   const router = useRouter();
 
   if (status !== 'authenticated') {
