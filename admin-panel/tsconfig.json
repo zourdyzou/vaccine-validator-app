@@ -23,7 +23,7 @@
       "@/public/*": ["./public/*"],
       "@/components/*": ["./components/*"],
       "@/utils/*": ["./utils/*"],
-      "@/api/*": ["./api/*"],
+      "@/axios/*": ["./api-axios/*"],
       "@/screens/*": ["./screens/*"],
       "@/interfaces/*": ["./interfaces/*"],
       "@/redux/*": ["./redux/*"],

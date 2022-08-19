@@ -1,6 +1,5 @@
 /* eslint-disable indent */
 import { Dispatch } from 'react';
-import axios from 'axios';
 import {
   ClearError,
   IAdminSummaryFail,
@@ -8,7 +7,7 @@ import {
   IAdminSummarySuccess,
 } from '@/interfaces/admin-type-action';
 import { AdminSummaryType } from '@/redux/constants/admin-constant';
-import { adminApi } from '@/api/adminApi';
+import { adminApi } from '../../api-axios/adminApi';
 import { IAdminSummaryData } from '@/interfaces/data-type';
 
 export function getErrorMessage(error: unknown) {
