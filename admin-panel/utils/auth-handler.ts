@@ -1,6 +1,6 @@
 import { Router } from 'next/router';
 
-import { authApi } from '../api-axios/authApi';
+import { authApi } from '@/axios/authApi';
 
 export const isAuthenticated = async (): Promise<boolean> => {
   const token = localStorage.getItem('token');
