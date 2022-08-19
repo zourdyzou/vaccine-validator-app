@@ -16,7 +16,7 @@ import { wrapper } from '@/redux/store';
 import { getSummary } from '@/redux/actions/admin-action';
 import { useAppSelector } from '@/hooks/redux';
 import { VaccineChart } from '@/components/shared/VaccineChart';
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 import * as React from 'react';
 import { LatestVaccineLotTable } from '@/components/shared/LatestVaccineLotTable';
 
@@ -58,6 +58,9 @@ const Home: NextPage = () => {
         <div className="m-5 flex  gap-5">
           <VaccineChart chartData={state.userVaccinatedAnalyst} />
           <div className="w-full">
+            <div className="py-2 px-2 mb-2 font-bold uppercase text-2xl bg-amber-500 rounded">
+              <h1>Latest Vaccine Lots</h1>
+            </div>
             <LatestVaccineLotTable list={state.latestVaccineLot} />
           </div>
         </div>

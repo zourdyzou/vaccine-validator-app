@@ -4,8 +4,6 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import { ThemeProvider, CssBaseline, createTheme, Box } from '@mui/material';
 import { SessionProvider } from 'next-auth/react';
 
-import { Loading } from '@/components/shared/Loading';
-
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -28,17 +26,9 @@ const clientSideEmotionCache = createEmotionCache();
 const lightTheme = createTheme(lightThemeOptions);
 
 const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
-  // const { pathname } = useRouter();
-  const [isLoading, setIsLoading] = React.useState(false);
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-  return isLoading ? (
-    <Box sx={{ width: '100%', height: '100vh' }}>
-      <div className="flex items-center justify-center h-full">
-        <Loading />
-      </div>
-    </Box>
-  ) : (
+  return (
     <SessionProvider session={pageProps.session}>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={lightTheme}>
