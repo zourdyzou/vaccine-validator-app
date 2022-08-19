@@ -39,6 +39,7 @@ const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, token }) {
       (session.user as any) = token.user;
+
       axios.defaults.headers.common.Authorization = `Bearer ${
         (token.user as any).token
       }`;
