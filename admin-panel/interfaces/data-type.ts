@@ -56,3 +56,16 @@ export interface IVaccinated {
   vaccineId: string;
   vaccineLotId: string;
 }
+
+export interface IAdminLoginInfo {
+  token: string;
+  admin: {
+    createdAt: string;
+    id: string;
+    updatedAt: string;
+    username: string;
+    __v: 0;
+    _id: string;
+  };
+  message: string;
+}

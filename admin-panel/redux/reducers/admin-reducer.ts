@@ -1,7 +1,6 @@
 /* eslint-disable indent */
 import { IAdminAction, ClearError } from '@/interfaces/admin-type-action';
 import { AdminSummaryType } from '@/redux/constants/admin-constant';
-import { IAdminSummaryData } from '@/interfaces/data-type';
 
 const adminSummaryInitialState = {
   loading: false,
@@ -17,10 +16,10 @@ const adminSummaryInitialState = {
     userWithOneDose: 0,
     userWithZeroDose: 0,
   },
-} as IAdminSummaryData;
+};
 
 export const adminSummaryReducer = (
-  state: IAdminSummaryData = adminSummaryInitialState,
+  state = adminSummaryInitialState,
   action: IAdminAction
 ) => {
   switch (action.type) {

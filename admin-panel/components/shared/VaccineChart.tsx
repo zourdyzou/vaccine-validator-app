@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -13,7 +13,7 @@ export interface VaccineChartTypes {
   };
 }
 
-export const Loading: React.FunctionComponent<VaccineChartTypes> = ({
+export const VaccineChart: React.FunctionComponent<VaccineChartTypes> = ({
   chartData,
 }) => {
   const data = {
@@ -52,15 +52,20 @@ export const Loading: React.FunctionComponent<VaccineChartTypes> = ({
   };
 
   return (
-    <Pie
-      data={data}
-      options={{
-        plugins: {
-          legend: {
-            position: 'bottom',
+    <div className="w-[400px] border p-3 bg-white rounded">
+      <h1 className="pb-7 pt-3 px-2 text-3xl uppercase text-black font-bold">
+        Vaccine Analysis
+      </h1>
+      <Doughnut
+        data={data}
+        options={{
+          plugins: {
+            legend: {
+              position: 'bottom',
+            },
           },
-        },
-      }}
-    />
+        }}
+      />
+    </div>
   );
 };

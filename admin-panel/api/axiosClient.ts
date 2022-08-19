@@ -1,10 +1,10 @@
 import axios from 'axios';
 import queryString from 'query-string';
 
-const IS_SERVER = typeof window === 'undefined';
+export const IS_SERVER = typeof window === 'undefined';
 
 const baseUrl = 'https://vaccine-validator-demo.herokuapp.com/api/';
-const getToken = () => !IS_SERVER && localStorage.getItem('token');
+export const getToken = () => !IS_SERVER && localStorage.getItem('token');
 
 const axiosClient = axios.create({
   baseURL: baseUrl,
@@ -12,11 +12,13 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(async (config) => {
+  const defaultHeaders = axios.defaults.headers.common;
+
   return {
     ...config,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${getToken()}`,
+      ...defaultHeaders,
     },
   };
 });

@@ -9,8 +9,9 @@ import {
 } from '@/interfaces/admin-type-action';
 import { AdminSummaryType } from '@/redux/constants/admin-constant';
 import { adminApi } from '@/api/adminApi';
+import { IAdminSummaryData } from '@/interfaces/data-type';
 
-function getErrorMessage(error: unknown) {
+export function getErrorMessage(error: unknown) {
   if (error instanceof Error) return error.message;
   return String(error);
 }
@@ -29,7 +30,7 @@ export const getSummary =
 
       dispatch({
         type: AdminSummaryType.ADMIN_FETCH_SUMMARY_DATA_SUCCESS,
-        payload: adminSummaryData.data,
+        payload: adminSummaryData as unknown as IAdminSummaryData,
       });
     } catch (error) {
       dispatch({

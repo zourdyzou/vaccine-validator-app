@@ -2,6 +2,7 @@ import * as React from 'react';
 import type { AppProps } from 'next/app';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { ThemeProvider, CssBaseline, createTheme, Box } from '@mui/material';
+import { SessionProvider } from 'next-auth/react';
 
 import { Loading } from '@/components/shared/Loading';
 
@@ -38,12 +39,14 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
       </div>
     </Box>
   ) : (
-    <CacheProvider value={emotionCache}>
-      <ThemeProvider theme={lightTheme}>
-        <CssBaseline />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </CacheProvider>
+    <SessionProvider session={pageProps.session}>
+      <CacheProvider value={emotionCache}>
+        <ThemeProvider theme={lightTheme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </CacheProvider>
+    </SessionProvider>
   );
 };
 

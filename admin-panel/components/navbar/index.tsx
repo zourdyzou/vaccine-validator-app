@@ -1,4 +1,5 @@
 import React from 'react';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { LogoutIcon } from '@heroicons/react/outline';
 
@@ -18,7 +19,13 @@ export const NavigationHeader: React.FunctionComponent = () => {
           </div>
         </li>
         |
-        <li className="hover:cursor-pointer p-2 hover:bg-indigo-700 hover:rounded">
+        <li
+          onClick={async () => {
+            localStorage.removeItem('token');
+            await signOut();
+          }}
+          className="hover:cursor-pointer p-2 hover:bg-indigo-700 hover:rounded"
+        >
           <LogoutIcon className="w-7 h-7" />
         </li>
       </ul>

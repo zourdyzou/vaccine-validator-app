@@ -14,9 +14,15 @@ import { CardStats } from '@/components/data-card/card-stats';
 import { wrapper } from '@/redux/store';
 
 import { getSummary } from '@/redux/actions/admin-action';
-import { AnyAction } from '@reduxjs/toolkit';
+import { useAppSelector } from '@/hooks/redux';
+import { VaccineChart } from '@/components/shared/VaccineChart';
+import { getSession, useSession } from 'next-auth/react';
+import * as React from 'react';
+import { LatestVaccineLotTable } from '@/components/shared/LatestVaccineLotTable';
 
 const Home: NextPage = () => {
+  const state = useAppSelector((state) => state.adminSummary);
+
   return (
     <>
       <Head>
@@ -25,29 +31,35 @@ const Home: NextPage = () => {
       <DashboardLayout>
         <div className="m-4 mt-10 flex flex-grow xl:flex-nowrap flex-wrap gap-5">
           <CardStats
-            data={1000}
+            data={state.totalUser}
             label="Total user"
             ReactIcon={UsersIcon}
             color="text-orange-500"
           />
           <CardStats
-            data={246}
+            data={state.userVaccinated}
             label="User vaccinated"
             ReactIcon={BadgeCheckIcon}
             color="text-green-500"
           />
           <CardStats
-            data={40000}
+            data={state.availableVaccineDose}
             label="Available Vaccine dose"
             ReactIcon={VaccinesIcon}
             color="text-red-500"
           />
           <CardStats
-            data={20}
+            data={state.totalPlace}
             label="Total places"
             ReactIcon={LocationMarkerIcon}
             color="text-pink-600"
           />
+        </div>
+        <div className="m-5 flex  gap-5">
+          <VaccineChart chartData={state.userVaccinatedAnalyst} />
+          <div className="w-full">
+            <LatestVaccineLotTable list={state.latestVaccineLot} />
+          </div>
         </div>
       </DashboardLayout>
     </>
@@ -55,8 +67,10 @@ const Home: NextPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps(async ({ store }) => {
-    await store.dispatch(getSummary() as any);
+  wrapper.getServerSideProps(async ({ store, req }) => {
+    const session = await getSession({ req });
+
+    session && (await store.dispatch(getSummary() as any));
   });
 
 export default Home;

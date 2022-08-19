@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode } from 'react';
+import { FunctionComponent, ReactNode, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
@@ -8,11 +8,35 @@ import { sideBarItems } from '@/utils/data-content';
 
 import { GithubAuthor } from '@/components/shared/GithubAuthor';
 import { NavigationHeader } from '@/components/navbar';
+import * as React from 'react';
+import { Box } from '@mui/material';
+import { Loading } from '@/components/shared/Loading';
+import { useAppSelector } from '@/hooks/redux';
+import { useSession } from 'next-auth/react';
 
 const DashboardLayout: FunctionComponent<{ children: ReactNode }> = ({
   children,
 }) => {
   const { pathname } = useRouter();
+  const state = useAppSelector((state) => state.adminSummary);
+  const { status, data } = useSession();
+  const router = useRouter();
+
+  if (status !== 'authenticated') {
+    if (typeof window !== 'undefined') {
+      router.push('/login');
+    }
+  }
+
+  if (state.loading) {
+    return (
+      <Box sx={{ width: '100%', height: '100vh' }}>
+        <div className="flex items-center justify-center h-full">
+          <Loading />
+        </div>
+      </Box>
+    );
+  }
 
   return (
     <div className="flex">
