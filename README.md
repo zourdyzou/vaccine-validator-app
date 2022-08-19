@@ -15,4 +15,4 @@ creating this prototype app only to show how the app works in general, and last 
 | TypeScript      | https://typescriptlang.org |
 
 # Preview 
-!["Build vaccine passport with MERN stack"](https://user-images.githubusercontent.com/67447840/146678597-8cc5173c-ea2e-40c5-a9f3-45dc37b1b1cc.png "Build vaccine passport with MERN stack")
+![screencapture-localhost-3000-2022-08-19-13_56_34](https://user-images.githubusercontent.com/69587933/185614646-f1aafb2d-07c5-4fd7-9f28-173787c2dbd0.png)
