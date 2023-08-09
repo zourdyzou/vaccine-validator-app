@@ -16,7 +16,7 @@
   "keywords": [],
   "author": "Muhammad Zourdy",
   "engines": {
-    "node": "16.13.0"
+    "node": "16.20.2"
   },
   "license": "ISC",
   "dependencies": {
